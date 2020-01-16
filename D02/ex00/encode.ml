@@ -3,14 +3,9 @@ let rec encode_list l acc n = match l with
   | h::next::t ->
     begin
       if h = next then
-        begin
-          encode_list (next::t) acc (n + 1)
-        end
+        encode_list (next::t) acc (n + 1)
       else
-        begin
-          print_endline ("celia") ;
-          encode_list (next::t) (acc@[(n + 1, h)]) 0
-        end
+        encode_list (next::t) (acc@[(n + 1, h)]) 0
     end
   | h::t -> encode_list [] (acc@[(n + 1, h)]) 0
 
