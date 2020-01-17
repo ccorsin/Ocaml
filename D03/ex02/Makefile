@@ -1,6 +1,9 @@
 NAME = cipher
 
-SOURCES = cipher.ml
+SOURCES = 
+SOURCES = ./cipher.ml \
+		  ./uncipher.ml \
+		  ./main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
