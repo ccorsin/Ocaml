@@ -11,3 +11,36 @@ let ft_is_palindrome s =
         false
     in
     ft_loop s i j
+
+let () =
+  if ft_is_palindrome "radar" then
+    print_endline "true"
+  else print_endline "false";
+
+  if ft_is_palindrome "madam" then
+    print_endline "true"
+  else print_endline "false";
+
+  if ft_is_palindrome "Madam" then
+  print_endline "true"
+else print_endline "false";
+
+  if ft_is_palindrome "car" then
+    print_endline "true"
+  else print_endline "false";
+
+  if ft_is_palindrome "" then
+    print_endline "true"
+  else print_endline "false";
+
+  if ft_is_palindrome "121" then
+    print_endline "true"
+  else print_endline "false";
+
+  if ft_is_palindrome "1221" then
+    print_endline "true"
+  else print_endline "false";
+
+  if ft_is_palindrome "123" then
+    print_endline "true"
+  else print_endline "false";

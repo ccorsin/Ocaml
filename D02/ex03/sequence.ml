@@ -12,13 +12,13 @@ let rec encode_list l acc n = match l with
 let encode l =
   encode_list l [] 0
 
-let rec to_string l = match l with
-  | [] -> ""
-  | (count, num)::t -> (string_of_int count) ^ (string_of_int num) ^ (to_string t)
-
-let rec to_list str = match (String.length str) with
-    | 0 -> []
-    | x -> ((int_of_char (str.[0])) - 48) :: to_list (String.sub str 1 (x - 1))
+let rec from_tuples_to_list l = match l with
+  | [] -> []
+  | (count, num)::q -> (string_of_int count)::(num)::(from_tuples_to_list q)
+  
+let rec from_list_to_string l s = match l with
+  | [] -> s
+  | h::q -> from_list_to_string q (s ^ h)
 
 let sequence n =
   if n < 1 then
@@ -26,8 +26,8 @@ let sequence n =
   else
     let rec build_sequence i n l =
       if i = n then
-        to_string l
+        from_list_to_string l ""
       else
-        to_string (encode ( to_list(build_sequence (i + 1) n l)))
+        build_sequence (i + 1) n (from_tuples_to_list (encode l))
     in
-    build_sequence 1 n "1"
+    build_sequence 1 n ["1"]

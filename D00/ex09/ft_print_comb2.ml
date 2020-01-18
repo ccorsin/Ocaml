@@ -28,3 +28,6 @@ let ft_print_comb2 () =
       print_char '\n'
   in
   ft_iterate x y
+
+  let () =
+    ft_print_comb2 ()

@@ -13,3 +13,8 @@ let ft_print_rev s =
       print_char '\n'
       in
       ft_print_char len
+
+let () =
+  ft_print_rev "Hello world !";
+  ft_print_rev "";
+  ft_print_rev "42";

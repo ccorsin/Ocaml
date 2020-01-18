@@ -10,3 +10,12 @@ let rec ft_countdown x =
     print_char '\n' ;
     ft_countdown (x - 1)
     end
+
+let () =
+  ft_countdown 3;
+  print_endline "";
+  ft_countdown 12;
+  print_endline "";
+  ft_countdown 0;
+  print_endline "";
+  ft_countdown (-1);

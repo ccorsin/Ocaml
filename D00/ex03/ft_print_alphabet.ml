@@ -9,4 +9,5 @@ let ft_print_alphabet () =
       print_char '\n' in
   ft_print_letter 97
 
-let () = ft_print_alphabet ()
+let () =
+  ft_print_alphabet ()
