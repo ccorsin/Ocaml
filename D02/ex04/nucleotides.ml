@@ -15,4 +15,4 @@ let generate_nucleotide nucleobase = match nucleobase with
   | 'T' -> { p = "phosphate"; d = "deoxyribose"; n = T }
   | 'C' -> { p = "phosphate"; d = "deoxyribose"; n = C }
   | 'G' -> { p = "phosphate"; d = "deoxyribose"; n = G }
-  | '_' -> { p = "phosphate"; d = "deoxyribose"; n = None }
+  | _ -> { p = "phosphate"; d = "deoxyribose"; n = None }

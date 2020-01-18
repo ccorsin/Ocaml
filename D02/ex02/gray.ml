@@ -25,10 +25,24 @@ let mirror_list l =
   rev_acc [] l 
 
 let rec gray n =
-  if n = 1 then
+  if n < 1 then
+    ["Error"]
+  else if n = 1 then
     ["0" ; "1"]
   else
     begin
       let l = gray (n - 1) in
       fusion_list ((prefix_list l "0"),(prefix_list (mirror_list l) "1"))
     end
+
+let rec print_list = function 
+  [] -> print_endline ""
+  | e::l -> print_string e ; print_string " " ; print_list l
+
+let () =
+  print_list (gray 1);
+  print_list (gray 2);
+  print_list (gray 3);
+  print_list (gray 4);
+  print_list (gray 0);
+  print_list (gray (-10));

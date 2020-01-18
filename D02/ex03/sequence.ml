@@ -31,3 +31,15 @@ let sequence n =
         build_sequence (i + 1) n (from_tuples_to_list (encode l))
     in
     build_sequence 1 n ["1"]
+
+let () =
+  print_endline (sequence 0);
+  print_endline (sequence (-10));
+  print_endline (sequence 1);
+  print_endline (sequence 2);
+  print_endline (sequence 3);
+  print_endline (sequence 4);
+  print_endline (sequence 5);
+  print_endline (sequence 6);
+  print_endline (sequence 7);
+  print_endline (sequence 8);
