@@ -1,4 +1,4 @@
-type basic_tree = Node of string * basic_tree * basic_tree | Nil
+type 'a tree = Nil | Node of 'a * 'a tree * 'a tree
 
 let draw_square x y size =
   if size <> 0 then
