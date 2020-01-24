@@ -3,9 +3,11 @@ module type FRACTIONNAL_BITS =
     val bits : int
   end
 
-module type FractionnalBits =
-  functor () ->
-
+module Fractionnal_bits = 
+  functor (Fract : FRACTIONNAL_BITS) ->
+    struct 
+      let bits = Fract.bits
+    end
 
 module type FIXED = sig 
   type t
@@ -34,11 +36,18 @@ module type FIXED = sig
 end
 
 module type MAKE =
-  functor (FractionnalBits : FRACTIONNAL_BITS) -> FIXED
+  functor (Fract : FRACTIONNAL_BITS) -> FIXED
 
 module Make : MAKE =
-  functor (FactionnalBits : FRACTIONNAL_BITS) ->
+  functor (Fract : FRACTIONNAL_BITS) ->
     struct
+      type t = int
+
+      let of_int (i:int) = i lsl Fract.bits
+      let to_int t = t lsr Fract.bits
+      (* let to_float t =
+      let of_float (f:float) = *)
+        (* round() *)
 
     end
 
