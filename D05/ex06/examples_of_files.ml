@@ -21,7 +21,7 @@ let translate_one_string s =
     create_data one_string_list (a,"") a 0
 
 let rec translate_strings l acc = match l with
-  | [] -> []
+  | [] -> acc
   | h::q -> translate_strings q (acc@[translate_one_string h])
 
 let examples_of_files path : (float array * string) list =
@@ -31,5 +31,12 @@ let examples_of_files path : (float array * string) list =
     else
       []
 
-let () = 
-  ignore(example_of_files "ionosphere.test.csv")
+let () =
+  let print_float_pretty f =
+    print_string " " ; print_float f ; print_string "; "
+  in
+  let rec print_list l = match l with
+  | [] -> print_string""
+  | (a, s)::q -> print_string "[|" ; Array.iter print_float_pretty a ; print_string "|], \"" ; print_string s ; print_string "\"" ; print_endline "" ; print_list q
+  in
+  print_list (examples_of_files "test.csv")
