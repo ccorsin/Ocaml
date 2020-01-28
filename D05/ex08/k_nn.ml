@@ -40,6 +40,14 @@ let examples_of_files path : (float array * string) list =
     else
       []
 
+let rec insert x l arr = match l with
+    | [] -> [x]
+    | y::ys -> if eu_dist x arr < eu_dist y arr then x::y::ys else y::insert x ys
+
+let rec remove_last l acc = match l with
+  | h::[] -> acc
+  | h::q -> remove_last l acc@[h]
+
 let k_nn data k (r:(float array * string)) =
   let (arr, str) = r in
   let rec find_k_match d min acc =
@@ -48,6 +56,14 @@ let k_nn data k (r:(float array * string)) =
       | [] -> (min, acc)
       | (a, s)::q ->
         begin
+          let rec check_list l acc = match l with
+            | [] -> acc
+            | (h, s)::q -> 
+              begin
+                if (eu_dist h arr > eu_dist a arr) then 
+                let ll = insert a l arr in
+                if List.length acc = k then remove_lasr ll []
+              end
           if ((eu_dist a arr) < min_n) || (min_n = (-1.)) || (List.length acc < k) then find_k_match q (a, (eu_dist a arr), s) ([(a, s)]@acc)
           else find_k_match q min acc
         end
