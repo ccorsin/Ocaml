@@ -8,6 +8,7 @@ let main () =
   let doctor = new Doctor.doctor "Doctor" 35 people in
     print_endline ("To_string : " ^ (doctor#to_string));
     print_string "Talk      : " ; doctor#talk;
+    doctor#use_sonic_screwdriver ;
     print_string "Travel in time : " ; doctor#travel_in_time 2000 2020 ; print_endline (doctor#to_string)
 
 let () =
