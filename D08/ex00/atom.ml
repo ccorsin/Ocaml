@@ -11,7 +11,7 @@ class virtual atom name symbol number =
 
 class hydrogen =
   object
-    inherit atom "Hydrogen" "O" 16
+    inherit atom "Hydrogen" "H" 1
   end
 
 class carbon =
