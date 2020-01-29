@@ -1,5 +1,6 @@
 let main () =
   Random.self_init () ;
+  
   let people1 = new People.people "Celia" in
   let people2 = new People.people "Max" in
   let people3 = new People.people "Paul" in
@@ -20,7 +21,10 @@ let main () =
   print_endline "";
   let doc_army = new Army.army [doc1] in
   doc_army#add doc2 ; doc_army#add doc3 ; doc_army#print_army ;
-  print_int doc_army#length ; print_string " doctors in the army now ! " ; print_endline ""
+  print_int doc_army#length ; print_string " doctors in the army now ! " ; print_endline "" ; print_endline "" ;
+  print_endline "WAR IS COMING ! " ;
+  let war = new Galifrey.galifrey dal_army doc_army people_army in
+  war#do_time_war
 
 
 let () =
