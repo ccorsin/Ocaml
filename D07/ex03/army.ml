@@ -14,15 +14,3 @@ class ['a] army (member : 'a list) =
       | _ -> print_endline ""
     in print _member
   end
-
-
-
-(* class ['a] army (l: 'a list) = object
-	val _army: 'a list = l
-
-	method add (elem: 'a) = elem#talk ; let new_a = new army (elem :: l) in new_a#length ; new_a
-	method delete = match _army with
-		| elem :: tail -> elem#die ; new army tail
-    | [] -> new army _army
-  method length = print_int (List.length _army)
-end *)
