@@ -19,16 +19,16 @@ let clean_list molecules =
 let clean_list_atoms atoms =
   let rec get_atoms l elts = match l with
     | [] -> elts
-    | h::q ->
+    | (n, h)::q ->
       begin
         let rec loop ll head = match ll with
           | [] -> get_atoms q (elts@[(1, h)])
-          | (i, m)::t ->
+          | (i, a)::t ->
             begin
-                if (m#equals h) then
-                get_atoms q (head@[((i + 1), m)]@t)
+                if (a#equals h) then
+                  get_atoms q (head@[((i + 1 + n), a)]@t)
                 else
-                  loop t (head@[(i, m)])
+                  loop t (head@[(i, a)])
             end
             in loop elts []
           end
@@ -38,21 +38,21 @@ let rec print_list l = match l with
   | (m, i)::q -> (print_int i); print_string (" " ^ m#to_string) ; print_list q
   | [] -> print_endline ""
 
-let rec get_all_atoms (atoms : (Atom.atom * int) list) i acc = match atoms with
+let rec get_all_atoms (atoms : (int * Atom.atom) list) i acc = match atoms with
   | [] -> acc
-  | (m, n)::q -> get_all_atoms q i [(m, (n * i))]@acc
+  | (n, a)::q -> get_all_atoms q i [((n * i), a)]@acc
   
 let count_atoms (molecules : (Molecule.molecule * int) list) acc =
   let rec aggregate_atoms l acc = match l with
     | [] -> acc
     | (m, i)::q -> 
       begin
-        (* let atoms = get_all_atoms (m#atoms) i [] in *)
-        aggregate_atoms q acc@m#atoms
+        let atoms = get_all_atoms (m#atoms) i [] in
+        aggregate_atoms q acc@atoms
       end
   in
-  (* clean_list_atoms (aggregate_atoms molecules []) *)
-  aggregate_atoms molecules []
+  clean_list_atoms (aggregate_atoms molecules [])
+  (* aggregate_atoms molecules [] *)
 
 class alkane_combustion (alkanes : Alkane.alkane list) =
   object (self)
