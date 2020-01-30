@@ -17,7 +17,11 @@ let main () =
   let al2o3 = new Molecule.aluminium_oxide in
   print_endline ("Alumine : " ^ al2o3#to_string);
   let tnt = new Molecule.trinitrotoluene in
-  print_endline ("TNT : " ^ tnt#to_string)
+  print_endline ("TNT : " ^ tnt#to_string);
+  let tnt2 = new Molecule.trinitrotoluene in
+  print_endline ("TNT2 : " ^ tnt2#to_string);
+  print_string "TNT = water ? " ; print_endline (string_of_bool (tnt#equals water));
+  print_string "TNT = TNT ? " ; print_endline (string_of_bool (tnt#equals tnt2))
 
 let () =
   main ()
