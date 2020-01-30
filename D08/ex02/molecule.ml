@@ -42,7 +42,7 @@ class virtual molecule name (atoms : Atom.atom list) =
     method formula : string = generate_formula atoms
 
     method to_string = "Molecule -> { name : " ^ self#name ^ " ; formula : " ^ self#formula ^ " } "
-    method equals (bench : molecule) = (self#name = bench#name) && (self#formula = bench#formula)
+    method equals (bench : molecule) = (self#formula = bench#formula)
   end
 
 class water =
@@ -68,4 +68,10 @@ end
 class  aluminium_oxide =
 object
   inherit molecule "Aluminium oxide" [new Atom.oxygen ; new Atom.oxygen ; new Atom.aluminium ; new Atom.oxygen ; new Atom.aluminium]
+end
+
+class trinitrotoluene =
+object
+  inherit molecule "Trinitrotoluene" ((	List.init 3 (fun _ -> new Atom.nitrogen) ) @ (	List.init 5 (fun _ -> new Atom.hydrogen) )
+                                    @ (	List.init 6 (fun _ -> new Atom.oxygen) ) @ (	List.init 7 (fun _ -> new Atom.carbon) ))
 end

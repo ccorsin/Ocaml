@@ -15,7 +15,9 @@ let main () =
   let caco3 = new Molecule.calcium_carbonate in
   print_endline ("Calcium carbonate : " ^ caco3#to_string);
   let al2o3 = new Molecule.aluminium_oxide in
-  print_endline ("Alumine : " ^ al2o3#to_string)
+  print_endline ("Alumine : " ^ al2o3#to_string);
+  let tnt = new Molecule.trinitrotoluene in
+  print_endline ("TNT : " ^ tnt#to_string)
 
 let () =
   main ()
