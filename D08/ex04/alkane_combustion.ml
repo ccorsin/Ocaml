@@ -22,11 +22,11 @@ let clean_list_atoms atoms =
     | (n, h)::q ->
       begin
         let rec loop ll head = match ll with
-          | [] -> get_atoms q (elts@[(1, h)])
+          | [] -> get_atoms q (elts@[(n, h)])
           | (i, a)::t ->
             begin
                 if (a#equals h) then
-                  get_atoms q (head@[((i + 1 + n), a)]@t)
+                  get_atoms q (head@[((i + n), a)]@t)
                 else
                   loop t (head@[(i, a)])
             end
@@ -52,7 +52,6 @@ let count_atoms (molecules : (Molecule.molecule * int) list) acc =
       end
   in
   clean_list_atoms (aggregate_atoms molecules [])
-  (* aggregate_atoms molecules [] *)
 
 class alkane_combustion (alkanes : Alkane.alkane list) =
   object (self)
@@ -72,12 +71,21 @@ class alkane_combustion (alkanes : Alkane.alkane list) =
         | (m, i)::q -> count q (acc + (i * ((m#n)* 2 + 2)))
       in count l 0
     method get_start : (Molecule.molecule * int) list = 
-          let z = ((2 * self#count_C) + self#count_H) / 2 in
+          let z = (((2 * self#count_C) + self#count_H) / 2) in
           (self#count_molecules) @ [(new Molecule.dioxygen, z)]
     method get_result : (Molecule.molecule * int) list =
           [(new Molecule.carbon_dioxyde, self#count_C) ; (new Molecule.water, (self#count_H / 2))]
+    method atoms : (int * Atom.atom) list = count_atoms (self#get_result) []
     (* method balance = [] *)
-    (* method is_balanced : bool = *)
-      (* count_atoms self#get_start = count_atoms self#get_result *)
+    method is_balanced =
+      let rec compare_atoms l1 l2 = match (l1, l2) with
+        | ([],[]) -> true
+        | ([],_) -> false
+        | (_,[]) -> false
+        | ((i1, a1)::q1, (i2, a2)::q2) ->
+          (print_int (i1) ;
+          if (i1 = i2) && (a1#equals a2) then compare_atoms q1 q1
+          else false)
+      in compare_atoms (count_atoms (self#get_start) []) (count_atoms (self#get_result) [])
 
 end
