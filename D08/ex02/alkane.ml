@@ -16,8 +16,8 @@ class virtual alkane n =
           | 12 -> "Dodec"
           | _ -> "Toobig")
         ^ "ane")
-        (( List.init n (fun _ -> (new Atom.carbon :> Atom.atom)) )
-        @ (	List.init (2 * n + 2) (fun _ -> (new Atom.hydrogen :> Atom.atom)) ))
+        (( List.init n (fun _ -> new Atom.carbon) )
+        @ (	List.init (2 * n + 2) (fun _ -> new Atom.hydrogen) ))
         
     method n : int = n
     method to_string :string = "Alkane -> { name : " ^ self#name ^ " ; formula : " ^ self#formula ^ " } "

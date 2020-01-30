@@ -9,8 +9,8 @@ let main () =
   print_endline m4#to_string ;
   let m8 = new Alkane.octane in
   print_endline m8#to_string ;
-  print_endline (string_of_bool (m2#equals ((m2_bis :> Alkane.alkane) :> Molecule.molecule))) ;
-	print_endline (string_of_bool (m2#equals ((m8  :> Alkane.alkane) :> Molecule.molecule)))
+  print_string "ethane = ethane2 ? " ; print_endline (string_of_bool (m2#equals (m2_bis :> Molecule.molecule))) ;
+	print_string "ethane = octane ? " ; print_endline (string_of_bool (m2#equals (m8 :> Molecule.molecule)))
 
 let () =
   main ()
