@@ -1,3 +1,5 @@
+exception Unbalanced of string
+
 let clean_list molecules =
   let rec count_molecules l elts = match l with
     | [] -> elts
@@ -82,15 +84,16 @@ class alkane_combustion (alkanes : Alkane.alkane list) =
         | (m, i)::q -> count q (acc + (i * ((m#n)* 2 + 2)))
       in count l 0
     method get_start : (Molecule.molecule * int) list = 
-      let z = (((2 * self#count_C) + (self#count_H / 2))) in
-      if (z mod 2 = 0) then (self#count_molecules) @ [(new Molecule.dioxygen, (z / 2))]
-      else (double_molecules (self#count_molecules)) @ [(new Molecule.dioxygen, z)]
+        let z = (((2 * self#count_C) + (self#count_H / 2))) in
+        if (z mod 2 = 0) then (self#count_molecules) @ [(new Molecule.dioxygen, (z / 2))]
+        else (double_molecules (self#count_molecules)) @ [(new Molecule.dioxygen, z)]
     method get_result : (Molecule.molecule * int) list =
-      let z = (((2 * self#count_C) + (self#count_H / 2))) in
-      if (z mod 2 = 0) then  [(new Molecule.carbon_dioxyde, self#count_C) ; (new Molecule.water, (self#count_H / 2))]
-      else [(new Molecule.carbon_dioxyde, ((self#count_C) * 2)) ; (new Molecule.water, (self#count_H))]
+        let z = (((2 * self#count_C) + (self#count_H / 2))) in
+        if (z mod 2 = 0) then  [(new Molecule.carbon_dioxyde, self#count_C) ; (new Molecule.water, (self#count_H / 2))]
+        else [(new Molecule.carbon_dioxyde, ((self#count_C) * 2)) ; (new Molecule.water, (self#count_H))]
          
-    method atoms : (int * Atom.atom) list = count_atoms (self#get_result) []
+    method atoms_result : (int * Atom.atom) list = count_atoms (self#get_result) []
+    method atoms_start : (int * Atom.atom) list = count_atoms (self#get_start) []
     method balance =
       let z = (((2 * self#count_C) + (self#count_H / 2))) in
         if (z mod 2 = 0) then ((new alkane_combustion alkanes) :> Reaction.reaction)
