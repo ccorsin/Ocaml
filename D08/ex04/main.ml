@@ -36,8 +36,8 @@ let main () =
   print_string "Reactifs : " ; print_list_short (r1#get_start); print_endline "";
   print_string "Produits : " ; print_list_short (r1#get_result); print_endline "";
   print_string "Raction : " ; print_list_short (r1#get_start) ; print_string "= " ; print_list_short (r1#get_result) ; print_endline "";
-  print_atom_list (r1#atoms)
-  (* print_endline (string_of_bool r1#is_balanced)  *)
+  print_atom_list (r1#atoms);
+  print_endline (string_of_bool r1#is_balanced) 
 
 let () =
   main ()
