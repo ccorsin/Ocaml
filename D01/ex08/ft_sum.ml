@@ -14,4 +14,8 @@ let () =
   print_float (ft_sum (fun i -> float_of_int (i)) 0 10);
   print_char '\n';
   print_float (ft_sum (fun i -> float_of_int (i)) 10 2);
+  print_char '\n';
+  print_float (ft_sum (fun i -> float_of_int (i)) 5 5);
+  print_char '\n';
+  print_float (ft_sum (fun i -> float_of_int (i)) 5 6);
   print_char '\n'

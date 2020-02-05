@@ -3,7 +3,7 @@ class ['a] army (member : 'a list) =
     val mutable _member : 'a list = member
 
     method add (a : 'a) = _member <- _member@[a]
-    method remove = _member <- match _member with 
+    method delete = _member <- match _member with 
       | h::q -> q
       | _ -> []
     method length = List.length _member

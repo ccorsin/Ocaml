@@ -55,7 +55,7 @@ let complementary_helix (h : helix) : helix =
   in
   let rec build_helix helix acc = match helix with
     | [] -> acc
-    | h::q -> build_helix q (complementary_base h::acc)
+    | h::q -> build_helix q (acc@[(complementary_base h)])
   in
   build_helix h []
 
@@ -71,6 +71,23 @@ let generate_rna (h : helix) : rna =
   in
   let rec build_helix_rna helix acc = match helix with
     | [] -> acc
-    | h::q -> build_helix_rna q (complementary_base_rna h::acc)
+    | h::q -> build_helix_rna q (acc@[(complementary_base_rna h)])
   in
   build_helix_rna h []
+
+let () =
+  Random.self_init ();
+  let print_nucleobase n = match n with
+  | A -> "A" 
+  | T -> "T"
+  | C -> "C"
+  | G -> "G"
+  | U -> "U"
+  | None -> "None" in
+  let rec print_list li = match li with
+    | [] -> print_endline ""
+    | e::l -> print_string (print_nucleobase e) ; print_list l in
+  let helix5 = generate_helix 5 in
+  print_string "Helix of 5   : " ; print_string (helix_to_string helix5) ; print_endline "" ;
+  print_string "RNA          : " ; print_list (generate_rna helix5) ;
+  print_string "Complementary: " ; print_string (helix_to_string (complementary_helix helix5)) ; print_endline "" ;

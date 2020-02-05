@@ -148,7 +148,7 @@ module Value =
     (Value.toString self.value) ^ (Color.toString self.color)
 
   let toStringVerbose self =
-    "Card(" ^ (Value.toStringVerbose self.value) ^ ","  ^ (Color.toStringVerbose self.color) ^ ")"
+    "Card(" ^ (Value.toStringVerbose self.value) ^ ", "  ^ (Color.toStringVerbose self.color) ^ ")"
 
   let compare t1 t2 =
     (Value.toInt t1.value) - (Value.toInt t2.value)

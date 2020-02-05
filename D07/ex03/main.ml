@@ -13,13 +13,13 @@ let main () =
   print_endline "" ; print_string "Add Paul -> " ; people_army#add people3 ;
   people_army#print_army ;
   print_int people_army#length ; print_string " people in the army now ! " ; print_endline "" ;
-  print_endline "" ; print_endline "" ; print_endline "Remove one people : " ; people_army#remove ;
+  print_endline "" ; print_endline "" ; print_endline "Remove one people : " ; people_army#delete ;
   print_int people_army#length ; print_string " people in the army now ! " ; print_endline "" ;
   people_army#print_army ;
-  print_endline "" ; print_endline "And another... " ; people_army#remove ;
+  print_endline "" ; print_endline "And another... " ; people_army#delete ;
   people_army#print_army ;
   print_int people_army#length ; print_string " people in the army now ! " ; print_endline "" ;
-  print_endline "" ; print_endline "And the last. " ; people_army#remove ;
+  print_endline "" ; print_endline "And the last. " ; people_army#delete ;
   people_army#print_army ;
   print_int people_army#length ; print_string " people in the army now ! " ; print_endline "" ;
   print_endline "" ; print_endline "" ;
@@ -34,11 +34,11 @@ let main () =
   print_int dal_army#length ; print_string " dalek in the army now ! " ; print_endline "" ;
   print_string "Add dal3 -> " ; dal_army#add dal3 ;
   print_int dal_army#length ; print_string " dalek in the army now ! " ; print_endline "" ;
-  print_endline "" ; print_endline "Remove one dalek : " ; dal_army#remove ;
+  print_endline "" ; print_endline "Remove one dalek : " ; dal_army#delete ;
   print_int dal_army#length ; print_string " dalek in the army now ! " ; print_endline "" ;
-  print_endline "And another... " ; dal_army#remove ;
+  print_endline "And another... " ; dal_army#delete ;
   print_int dal_army#length ; print_string " dalek in the army now ! " ; print_endline "" ;
-  print_endline "And the last. " ; dal_army#remove ;
+  print_endline "And the last. " ; dal_army#delete ;
   print_int dal_army#length ; print_string " dalek in the army now ! " ; print_endline "";
   print_endline "" ; print_endline "" ;
   let doc1 = new Doctor.doctor "Doc1" 25 people1 in
@@ -52,11 +52,11 @@ let main () =
   print_int doc_army#length ; print_string " doctors in the army now ! " ; print_endline "" ;
   print_string "Add doc3 -> " ; doc_army#add doc3 ;
   print_int doc_army#length ; print_string " doctors in the army now ! " ; print_endline "" ;
-  print_endline "" ; print_endline "Remove one doctor : " ; doc_army#remove ;
+  print_endline "" ; print_endline "Remove one doctor : " ; doc_army#delete ;
   print_int doc_army#length ; print_string " doc in the army now ! " ; print_endline "" ;
-  print_endline "And another... " ; doc_army#remove ;
+  print_endline "And another... " ; doc_army#delete ;
   print_int doc_army#length ; print_string " doc in the army now ! " ; print_endline "" ;
-  print_endline "And the last. " ; doc_army#remove ;
+  print_endline "And the last. " ; doc_army#delete ;
   print_int doc_army#length ; print_string " doc in the army now ! " ; print_endline ""
 
 

@@ -17,3 +17,7 @@ let () =
   print_char '\n';
   print_int (tak 23498 98734 98776);
   print_char '\n';
+  print_int (tak 0 0 5);
+  print_char '\n';
+  print_int (tak 1 0 0);
+  print_char '\n';

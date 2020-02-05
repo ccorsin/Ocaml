@@ -75,4 +75,4 @@ let previous (t:t) : t = match t with
 | Jack -> T10
 | Queen -> Jack
 | King -> Queen
-| As -> As
+| As -> King

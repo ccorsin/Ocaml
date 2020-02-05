@@ -54,6 +54,20 @@ let complementary_helix (h : helix) : helix =
   in
   let rec build_helix helix acc = match helix with
     | [] -> acc
-    | h::q -> build_helix q (complementary_base h::acc)
+    | h::q -> build_helix q (acc@[(complementary_base h)])
   in
   build_helix h []
+
+let () =
+  Random.self_init ();
+  print_string "Helix of (-1) : " ; print_string (helix_to_string (generate_helix (-1))) ; print_endline "" ;
+  print_string "Helix of 0 : " ; print_string (helix_to_string (generate_helix 0)) ; print_endline "" ;
+  let helix1 = generate_helix 1 in
+  print_string "Helix of 1   : " ; print_string (helix_to_string helix1) ; print_endline "" ;
+  print_string "Complementary: " ; print_string (helix_to_string (complementary_helix helix1)) ; print_endline "" ;
+  let helix5 = generate_helix 5 in
+  print_string "Helix of 5   : " ; print_string (helix_to_string helix5) ; print_endline "" ;
+  print_string "Complementary: " ; print_string (helix_to_string (complementary_helix helix5)) ; print_endline "" ;
+  let helix10 = generate_helix 10 in
+  print_string "Helix of 10  : " ; print_string (helix_to_string helix10) ; print_endline "" ;
+  print_string "Complementary: " ; print_string (helix_to_string (complementary_helix helix10)) ; print_endline "" ;

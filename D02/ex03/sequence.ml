@@ -1,33 +1,32 @@
-let rec encode_list l acc n = match l with
-  | [] -> acc
-  | h::next::t ->
-    begin
-      if h = next then
-        encode_list (next::t) acc (n + 1)
-      else
-        encode_list (next::t) (acc@[(n + 1, h)]) 0
-    end
-  | h::t -> encode_list [] (acc@[(n + 1, h)]) 0
-
-let encode l =
-  encode_list l [] 0
-
-let rec from_tuples_to_list l = match l with
-  | [] -> []
-  | (count, num)::q -> (string_of_int count)::(num)::(from_tuples_to_list q)
-  
-let rec from_list_to_string l s = match l with
-  | [] -> s
-  | h::q -> from_list_to_string q (s ^ h)
-
 let sequence n =
   if n < 1 then
     ""
   else
     let rec build_sequence i n l =
       if i = n then
+        let rec from_list_to_string l s = match l with
+          | [] -> s
+          | h::q -> from_list_to_string q (s ^ h) in
         from_list_to_string l ""
       else
+        let encode l =
+          let rec encode_list l acc n = match l with
+            | [] -> acc
+            | h::next::t ->
+              begin
+                if h = next then
+                  encode_list (next::t) acc (n + 1)
+                else
+                  encode_list (next::t) (acc@[(n + 1, h)]) 0
+              end
+            | h::t -> encode_list [] (acc@[(n + 1, h)]) 0
+            in
+            encode_list l [] 0 in
+      
+          let rec from_tuples_to_list l = match l with
+            | [] -> []
+            | (count, num)::q -> (string_of_int count)::(num)::(from_tuples_to_list q) in
+
         build_sequence (i + 1) n (from_tuples_to_list (encode l))
     in
     build_sequence 1 n ["1"]

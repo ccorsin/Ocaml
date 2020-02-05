@@ -9,9 +9,12 @@ let eu_dist (a:float array) (b:float array) =
 let () =
   let a = [|1.; 1.; 1.; 1.|] in
   let b = [|2.; 2.; 2.; 2.|] in
+  print_string "Eu_dist [|1.; 1.; 1.; 1.|] and [|2.; 2.; 2.; 2.|] = ";
   print_float (eu_dist a b);
   print_endline "";
+  print_string "Eu_dist [|4.5; 1.0; (-2.5); 0.4|] and [|2.; 3.; 12.; (-42.)|] = ";
   print_float (eu_dist [|4.5; 1.0; (-2.5); 0.4|] [|2.; 3.; 12.; (-42.)|]);
   print_endline "";
+  print_string "Eu_dist [|1.; (-2.)|] and [| 4.; 2.|] = ";
   print_float (eu_dist [|1.; (-2.)|] [| 4.; 2.|]);
   print_endline "";

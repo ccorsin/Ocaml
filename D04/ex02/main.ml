@@ -40,7 +40,17 @@ let main () =
   print_endline "Bench";
   print_endline ("Card 1 vs. Card 2 ---> " ^ " Compare : " ^ (string_of_int(Card.compare c1 c2)) ^ " | Max : " ^ (Card.toString (Card.max c1 c2)) ^ " | Min : " ^ (Card.toString (Card.min c1 c2)));
   print_endline ("Card 1 vs. Card 3 ---> " ^ " Compare : " ^ (string_of_int(Card.compare c1 c3)) ^ " | Max : " ^ (Card.toString (Card.max c1 c3)) ^ " | Min : " ^ (Card.toString (Card.min c1 c3)));
-  print_endline ("Card 2 vs. Card 2 ---> " ^ " Compare : " ^ (string_of_int(Card.compare c2 c3)) ^ " | Max : " ^ (Card.toString (Card.max c2 c3)) ^ " | Min : " ^ (Card.toString (Card.min c2 c3)))
+  print_endline ("Card 3 vs. Card 2 ---> " ^ " Compare : " ^ (string_of_int(Card.compare c3 c2)) ^ " | Max : " ^ (Card.toString (Card.max c3 c2)) ^ " | Min : " ^ (Card.toString (Card.min c3 c2)));
+  print_endline "";
+  print_endline "Best of C1 / C2 / C3";
+  print_string (Card.toStringVerbose (Card.best [c1; c2; c3])); print_endline ""; print_endline "";
+  print_endline "If same value C1 / C2";
+  let (c1:Card.t) = Card.newCard Card.Value.T10 Card.Color.Heart in
+  let (c2:Card.t) = Card.newCard Card.Value.T10 Card.Color.Club in
+  print_endline ("Card 1 : " ^ Card.toStringVerbose c1);
+  print_endline ("Card 2 : " ^ Card.toStringVerbose c2);
+  print_endline ("C1/C2" ^ " Compare : " ^ (string_of_int(Card.compare c1 c2)) ^ " | Max : " ^ (Card.toString (Card.max c1 c2)) ^ " | Min : " ^ (Card.toString (Card.min c1 c2) ^ " | Best : " ^ Card.toStringVerbose (Card.best [c1; c2])));
+  print_endline ("C2/C1" ^ " Compare : " ^ (string_of_int(Card.compare c2 c1)) ^ " | Max : " ^ (Card.toString (Card.max c2 c1)) ^ " | Min : " ^ (Card.toString (Card.min c2 c1) ^ " | Best : " ^ Card.toStringVerbose (Card.best [c2; c1])))
 
 let () =
   main ()

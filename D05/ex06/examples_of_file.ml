@@ -24,7 +24,7 @@ let rec translate_strings l acc = match l with
   | [] -> acc
   | h::q -> translate_strings q (acc@[translate_one_string h])
 
-let examples_of_files path : (float array * string) list =
+let examples_of_file path : (float array * string) list =
   let all_string_list = read_lines path in
     if List.length all_string_list > 0 then
       translate_strings all_string_list []
@@ -39,4 +39,5 @@ let () =
   | [] -> print_string""
   | (a, s)::q -> print_string "[|" ; Array.iter print_float_pretty a ; print_string "|], \"" ; print_string s ; print_string "\"" ; print_endline "" ; print_list q
   in
-  print_list (examples_of_files "test.csv")
+  print_list (examples_of_file "test.csv");
+  (* print_list (examples_of_file "ionosphere.csv") *)

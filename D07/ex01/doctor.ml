@@ -1,8 +1,8 @@
-class doctor _name _age _sidekick =
+class doctor name age sidekick =
   object
-    val _name : string = _name
-    val mutable _age : int = _age
-    val sidekick : People.people = _sidekick
+    val _name : string = name
+    val mutable _age : int = age
+    val sidekick : People.people = sidekick
     val mutable _hp : int = 100
 
     initializer print_endline ("Created object of class doctor : { name: " ^ _name ^ ", hp: " ^ string_of_int _hp ^ ", age: " ^ string_of_int _age ^ ", sidekick: " ^ sidekick#to_string ^ " }")

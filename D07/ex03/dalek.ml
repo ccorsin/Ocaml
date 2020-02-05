@@ -14,6 +14,6 @@ class dalek =
     method talk = 
       let quotes = ["Explain! Explain!" ; "Exterminate! Exterminate!" ; "I obey!" ; "You are the Doctor! You are the enemy of the Daleks!"] in
       print_endline (List.nth quotes (Random.int 4))
-    method exterminate (p : People.people) = p#die
+    method exterminate (p : People.people) = _shield <- (_shield != true) ; p#die
     method die = print_endline "Emergency Temporal Shift!"
   end

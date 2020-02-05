@@ -185,15 +185,17 @@ module Value =
 
   let newDeck () =
     let all_cards = Card.all in
-      let rec build_deck n (acc:Card.t list) =
+      let rec build_deck n (acc:Card.t list) l =
         let c = Random.int (List.length all_cards) in
           let card = List.nth all_cards c in
             if n < 1 then
               acc
+            else if List.mem c l then
+              build_deck n acc l
             else
-              build_deck (n - 1) (card::acc)
+              build_deck (n - 1) (card::acc) (c::l)
       in
-      build_deck 52 []
+      build_deck 52 [] []
 
   let rec toStringList d = match d with
     | [] -> []

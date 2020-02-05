@@ -15,4 +15,5 @@ let rec ackermann m n =
     print_char '\n';
     print_int (ackermann 2 3);
     print_char '\n';
-    print_int (ackermann 4 1)
+    print_int (ackermann 4 1);
+    print_char '\n';

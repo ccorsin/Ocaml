@@ -1,10 +1,10 @@
-let rec check_with_list l2 c = match l2 with
-  | [] -> false
-  | h::t ->
-    if h = c then true
-    else check_with_list t c
-
-let rec crossover l1 l2 = match l1 with
+let rec crossover l1 l2 = 
+  let rec check_with_list m c = match m with
+    | [] -> false
+    | h::t ->
+      if h = c then true
+      else check_with_list t c
+  in match l1 with
   | [] -> []
   | h::t ->
     begin

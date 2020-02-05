@@ -61,14 +61,13 @@ let double_molecules (molecules : (Molecule.molecule * int) list) =
     | (m, i)::q -> double_loop q [(m, (i * 2))]@acc
   in double_loop molecules []
 
-let rec adjust_alkanes_list (alkanes : Alkane.alkane list) i acc = match i with
-  | 0 -> acc
-  | _ -> adjust_alkanes_list alkanes (i - 1) (alkanes@acc)
-
 class alkane_combustion (alkanes : Alkane.alkane list) =
   object (self)
     inherit Reaction.reaction ((alkanes :> Molecule.molecule list)@[new Molecule.dioxygen]) [new Molecule.water; new Molecule.carbon_dioxyde]
   
+    val _reactives = []
+    val _products = []
+
     method count_alkanes : (Alkane.alkane * int) list = clean_list alkanes
     method count_molecules : (Molecule.molecule * int) list = clean_list (alkanes :> Molecule.molecule list)
     method count_C : int = 
@@ -83,29 +82,42 @@ class alkane_combustion (alkanes : Alkane.alkane list) =
         | [] -> acc
         | (m, i)::q -> count q (acc + (i * ((m#n)* 2 + 2)))
       in count l 0
+
+    method get_reactives : (Molecule.molecule * int) list =
+      let z = (((2 * self#count_C) + (self#count_H / 2))) in
+      if (z mod 2 = 0) then (self#count_molecules) @ [(new Molecule.dioxygen, (z / 2))]
+      else (double_molecules (self#count_molecules)) @ [(new Molecule.dioxygen, z)]
+    method get_products : (Molecule.molecule * int) list =
+      let z = (((2 * self#count_C) + (self#count_H / 2))) in
+      if (z mod 2 = 0) then  [(new Molecule.carbon_dioxyde, self#count_C) ; (new Molecule.water, (self#count_H / 2))]
+      else [(new Molecule.carbon_dioxyde, ((self#count_C) * 2)) ; (new Molecule.water, (self#count_H))]
+    
     method get_start : (Molecule.molecule * int) list = 
-        let z = (((2 * self#count_C) + (self#count_H / 2))) in
-        if (z mod 2 = 0) then (self#count_molecules) @ [(new Molecule.dioxygen, (z / 2))]
-        else (double_molecules (self#count_molecules)) @ [(new Molecule.dioxygen, z)]
-    method get_result : (Molecule.molecule * int) list =
-        let z = (((2 * self#count_C) + (self#count_H / 2))) in
-        if (z mod 2 = 0) then  [(new Molecule.carbon_dioxyde, self#count_C) ; (new Molecule.water, (self#count_H / 2))]
-        else [(new Molecule.carbon_dioxyde, ((self#count_C) * 2)) ; (new Molecule.water, (self#count_H))]
-         
+      if self#is_balanced then _reactives
+      else raise (Unbalanced "Unbalanced reaction")
+
+    method get_result : (Molecule.molecule * int) list = 
+      if self#is_balanced then _products
+      else raise (Unbalanced "Unbalanced reaction")
+    
     method atoms_result : (int * Atom.atom) list = count_atoms (self#get_result) []
     method atoms_start : (int * Atom.atom) list = count_atoms (self#get_start) []
-    method balance =
-      let z = (((2 * self#count_C) + (self#count_H / 2))) in
-        if (z mod 2 = 0) then ((new alkane_combustion alkanes) :> Reaction.reaction)
-        else ((new alkane_combustion (adjust_alkanes_list alkanes 2 [])) :> Reaction.reaction)
-    method is_balanced = 
-      let rec compare_atoms l1 l2 = match (l1, l2) with
-        | ([],[]) -> true
-        | ([],_) -> false
-        | (_,[]) -> false
-        | ((i1, a1)::q1, (i2, a2)::q2) ->
-          if (i1 = i2) && (a1#equals a2) then compare_atoms q1 q1
-          else false
-      in compare_atoms (count_atoms (self#get_start) []) (count_atoms (self#get_result) [])
+    method balance = ({< _reactives = self#get_reactives ; _products = self#get_products >} :> Reaction.reaction)
+
+    method is_balanced = match (_reactives, _products) with
+      | ([], []) -> false
+      | ([], h::q) -> false
+      | (h::q, []) -> false
+      | (l1, l2) ->
+        begin
+          let rec compare_atoms l1 l2 = match (l1, l2) with
+            | ([],[]) -> true
+            | ([],_) -> false
+            | (_,[]) -> false
+            | ((i1, a1)::q1, (i2, a2)::q2) ->
+              if (i1 = i2) && (a1#equals a2) then compare_atoms q1 q1
+              else false
+          in compare_atoms (count_atoms (_reactives) []) (count_atoms (_products) [])
+        end
 
 end

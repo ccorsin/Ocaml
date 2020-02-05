@@ -39,8 +39,6 @@ module Make : MAKE =
 
       let of_int (i:int) = i lsl FractionnalBits.bits
       let to_int t = t lsr FractionnalBits.bits
-      (* let of_float f = int_of_float (ldexp f FractionnalBits.bits)
-      let to_float t = ldexp (float_of_int t) (-FractionnalBits.bits) *)
       let of_float x = int_of_float (floor (0.5 +. x *. (float_of_int (of_int 1))))
 			let to_float t = (float_of_int t) /. (2. ** float_of_int(FractionnalBits.bits))
       let to_string t = string_of_float (to_float t)
@@ -92,22 +90,22 @@ let () =
     if t then print_endline "True"
     else print_endline "False"
   in
-  print_string "ght : 42 > 21 ? " ; test (Fixed8.gth b a) ; 
-  print_string "ght : 21 > 42 ? " ; test (Fixed8.gth a b) ; 
-  print_string "lht : 1 > 1 ? " ; test (Fixed8.gth Fixed8.one Fixed8.one) ;
-  print_string "lht : 42 < 21 ? " ; test (Fixed8.lth b a) ;
-  print_string "lht : 21 < 42 ? " ; test (Fixed8.lth a b) ;
-  print_string "lht : 1 < 1 ? " ; test (Fixed8.lth Fixed8.one Fixed8.one) ;
-  print_string "ght : 42 >= 21 ? " ; test (Fixed8.gte b a) ; 
-  print_string "ght : 21 >= 42 ? " ; test (Fixed8.gte a b) ; 
-  print_string "ght : 1 >= 1 ? " ; test (Fixed8.gte Fixed8.one Fixed8.one) ; 
-  print_string "lht : 42 <= 21 ? " ; test (Fixed8.lte b a) ;
-  print_string "lht : 21 <= 42 ? " ; test (Fixed8.lte a b) ;
-  print_string "lht : 1 <= 1 ? " ; test (Fixed8.lte Fixed8.one Fixed8.one) ;
+  print_string "gth : 42 > 21 ? " ; test (Fixed8.gth b a) ; 
+  print_string "gth : 21 > 42 ? " ; test (Fixed8.gth a b) ; 
+  print_string "gth : 1 > 1 ? " ; test (Fixed8.gth Fixed8.one Fixed8.one) ;
+  print_string "lth : 42 < 21 ? " ; test (Fixed8.lth b a) ;
+  print_string "lth : 21 < 42 ? " ; test (Fixed8.lth a b) ;
+  print_string "lth : 1 < 1 ? " ; test (Fixed8.lth Fixed8.one Fixed8.one) ;
+  print_string "gte : 42 >= 21 ? " ; test (Fixed8.gte b a) ; 
+  print_string "gte : 21 >= 42 ? " ; test (Fixed8.gte a b) ; 
+  print_string "gte : 1 >= 1 ? " ; test (Fixed8.gte Fixed8.one Fixed8.one) ; 
+  print_string "lte : 42 <= 21 ? " ; test (Fixed8.lte b a) ;
+  print_string "lte : 21 <= 42 ? " ; test (Fixed8.lte a b) ;
+  print_string "lte : 1 <= 1 ? " ; test (Fixed8.lte Fixed8.one Fixed8.one) ;
   print_string "eqp : 0 = 0 ? " ; test (Fixed8.eqp Fixed8.zero Fixed8.zero) ;
   print_string "eqp : 0 = 1 ? " ; test (Fixed8.eqp Fixed8.zero Fixed8.one) ; 
-  print_string "eqp : 0 == 0 ? " ; test (Fixed8.eqs Fixed8.zero Fixed8.zero) ;
-  print_string "eqp : 0 == 1 ? " ; test (Fixed8.eqs Fixed8.zero Fixed8.one) ; 
+  print_string "eqs : 0 == 0 ? " ; test (Fixed8.eqs Fixed8.zero Fixed8.zero) ;
+  print_string "eqs : 0 == 1 ? " ; test (Fixed8.eqs Fixed8.zero Fixed8.one) ; 
   print_string "add : 21 + 42 = "; print_string (Fixed8.to_string (Fixed8.add a b)) ; print_endline "";
   print_string "sub : 21 - 42 = "; print_string (Fixed8.to_string (Fixed8.sub a b)) ; print_endline "";
   print_string "sub : 42 - 21 = "; print_string (Fixed8.to_string (Fixed8.sub b a)) ; print_endline "";

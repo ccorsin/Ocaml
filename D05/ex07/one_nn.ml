@@ -58,6 +58,19 @@ let one_nn data (r:(float array * string)) =
   let () =
     let data = examples_of_files "test.csv" in
     let radar1 = ([|17.2; 14.3; 11.2|], "c") in
-    print_string "Radar 1 : " ; print_endline (one_nn data radar1);
+    print_endline "DATA : [| 1.0; 1.0; 1.0 |], \"g\"     [|10.3; 15.2; 12.7 |], \"f\"";
+    print_string "Radar 1 [|17.2; 14.3; 11.2|] : " ; print_endline (one_nn data radar1);
     let radar2 = ([|0.2; 4.3; 1.2|], "c") in
-    print_string "Radar 2 : " ; print_endline (one_nn data radar2)
+    print_string "Radar 2 [|0.2; 4.3; 1.2|] : " ; print_endline (one_nn data radar2);
+    print_endline "";
+    let data = examples_of_files "test2.csv" in
+    let radar1 = ([|17.2; 14.3; 11.2|], "c") in
+    print_endline "DATA 2: [| 1.0; 1.0; 1.0 |], \"b\"     [|10.3; 15.2; 12.7 |], \"g\"";
+    print_string "Radar 1 [|17.2; 14.3; 11.2|] : " ; print_endline (one_nn data radar1);
+    let radar2 = ([|0.2; 4.3; 1.2|], "c") in
+    print_string "Radar 2 [|0.2; 4.3; 1.2|] : " ; print_endline (one_nn data radar2);
+    print_endline "";
+    let data = examples_of_files "ionosphere.csv" in
+    let radar1 = ([|1.;0.;0.66161;-1.;1.;1.;1.;-0.67321;0.80893;-0.40446;1.;-1.;1.;-0.89375;1.;0.73393;0.17589;0.70982;1.;0.78036;1.;0.85268;1.;-1.;1.;0.85357;1.;-0.08571;0.95982;-0.36250;1.;0.65268;1.;0.34732|],"b") in
+    print_endline "DATA = ionosphere.csv";
+    print_string "Radar l.36 : " ; print_endline (one_nn data radar1)

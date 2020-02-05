@@ -1,48 +1,43 @@
-let rec print_list l = match l with
-      | [] -> ()
-      | h::t ->
-        begin
-          print_string h ;
-          print_char ' ' ;
-          print_list t
-        end
-
-let rec fusion_list (l1, l2) = match (l1, l2) with
-  | ([],[]) -> []
-  | (l1,[]) -> l1
-  | ([],l2) -> l2
-  | (t::q,_) -> t :: fusion_list (q, l2)
-
-let rec prefix_list l c = match l with
-  | [] -> []
-  | h::q -> (c ^ h) :: prefix_list q c
-
-let mirror_list l = 
-  let rec rev_acc acc t = match t with
-  | [] -> acc
-  | h::q -> rev_acc (h::acc) q
-  in
-  rev_acc [] l 
-
-let rec gray n =
+let gray n =
   if n < 1 then
-    ["Error"]
-  else if n = 1 then
-    ["0" ; "1"]
+    print_endline "Error"
   else
-    begin
-      let l = gray (n - 1) in
-      fusion_list ((prefix_list l "0"),(prefix_list (mirror_list l) "1"))
-    end
+    let rec build_gray n =
+      if n = 1 then
+        ["0" ; "1"]
+      else
+        begin
+          let l = build_gray (n - 1) in
 
-let rec print_list = function 
-  [] -> print_endline ""
-  | e::l -> print_string e ; print_string " " ; print_list l
+          let rec fusion_list (l1, l2) = match (l1, l2) with
+            | ([],[]) -> []
+            | (l1,[]) -> l1
+            | ([],l2) -> l2
+            | (t::q,_) -> t :: fusion_list (q, l2) in
+
+          let rec prefix_list l3 c = match l3 with
+            | [] -> []
+            | h::q -> (c ^ h) :: prefix_list q c in
+
+          let mirror_list l4 = 
+              let rec rev_acc acc t = match t with
+                | [] -> acc
+                | h::q -> rev_acc (h::acc) q
+              in
+              rev_acc [] l4
+          in
+          fusion_list ((prefix_list l "0"),(prefix_list (mirror_list l) "1"))
+        end
+      in
+      let rec print_list li = match li with
+        | [] -> print_endline ""
+        | e::l -> print_string e ; print_string " " ; print_list l in
+      print_list (build_gray n)
 
 let () =
-  print_list (gray 1);
-  print_list (gray 2);
-  print_list (gray 3);
-  print_list (gray 4);
-  print_list (gray 0);
-  print_list (gray (-10));
+  gray 1;
+  gray 2;
+  gray 3;
+  gray 4;
+  gray 0;
+  gray (-10);

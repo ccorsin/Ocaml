@@ -11,6 +11,9 @@ let () =
   print_string "(-2.) + 7. = ";
   print_float (sum (-2.) 7.);
   print_endline "";
-  print_string "(-10.000000000000001) + 99.999999999999999 = ";
-  print_float (sum (-10.000000000000001) 99.999999999999999);
-  print_endline ""
+  print_string "10.9 + 9.1 = ";
+  print_float (sum 10.9 9.1);
+  print_endline "";
+  print_string "(-10.) + 20. = ";
+  print_float (sum (-10.) 20.);
+  print_endline "";

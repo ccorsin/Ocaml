@@ -6,7 +6,7 @@ class virtual atom name symbol number =
 
     method to_string = "Atom : { name : " ^ self#name ^ " ; symbol : " ^ self#symbol ^ " ; atomic_number : " ^ string_of_int self#atomic_number ^ " }"
 
-    method equals (bench : atom) = (self#atomic_number = bench#atomic_number) && (self#symbol = bench#symbol) && (self#name = bench#name)
+    method equals (bench : atom) = (self#atomic_number = bench#atomic_number)
   end
 
 class hydrogen =
